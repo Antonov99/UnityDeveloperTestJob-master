@@ -84,13 +84,13 @@ namespace Cysharp.Threading.Tasks
         [Obsolete("Use WaitForEndOfFrame(MonoBehaviour) instead or UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate). Equivalent for coroutine's WaitForEndOfFrame requires MonoBehaviour(runner of Coroutine).")]
         public static YieldAwaitable WaitForEndOfFrame()
         {
-            return UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate);
+            return Yield(PlayerLoopTiming.LastPostLateUpdate);
         }
 
         [Obsolete("Use WaitForEndOfFrame(MonoBehaviour) instead or UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate). Equivalent for coroutine's WaitForEndOfFrame requires MonoBehaviour(runner of Coroutine).")]
         public static UniTask WaitForEndOfFrame(CancellationToken cancellationToken, bool cancelImmediately = false)
         {
-            return UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate, cancellationToken, cancelImmediately);
+            return Yield(PlayerLoopTiming.LastPostLateUpdate, cancellationToken, cancelImmediately);
         }
 #endif        
 
@@ -113,7 +113,7 @@ namespace Cysharp.Threading.Tasks
         {
             // use LastFixedUpdate instead of FixedUpdate
             // https://github.com/Cysharp/UniTask/issues/377
-            return UniTask.Yield(PlayerLoopTiming.LastFixedUpdate);
+            return Yield(PlayerLoopTiming.LastFixedUpdate);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Cysharp.Threading.Tasks
         /// </summary>
         public static UniTask WaitForFixedUpdate(CancellationToken cancellationToken, bool cancelImmediately = false)
         {
-            return UniTask.Yield(PlayerLoopTiming.LastFixedUpdate, cancellationToken, cancelImmediately);
+            return Yield(PlayerLoopTiming.LastFixedUpdate, cancellationToken, cancelImmediately);
         }
 
 		public static UniTask WaitForSeconds(float duration, bool ignoreTimeScale = false, PlayerLoopTiming delayTiming = PlayerLoopTiming.Update, CancellationToken cancellationToken = default(CancellationToken), bool cancelImmediately = false)
@@ -419,7 +419,7 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        sealed class WaitForEndOfFramePromise : IUniTaskSource, ITaskPoolNode<WaitForEndOfFramePromise>, System.Collections.IEnumerator
+        sealed class WaitForEndOfFramePromise : IUniTaskSource, ITaskPoolNode<WaitForEndOfFramePromise>, IEnumerator
         {
             static TaskPool<WaitForEndOfFramePromise> pool;
             WaitForEndOfFramePromise nextNode;

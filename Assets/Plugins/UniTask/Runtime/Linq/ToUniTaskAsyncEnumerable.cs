@@ -116,7 +116,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.source = source;
                 this.cancellationToken = cancellationToken;
 
-                this.called = false;
+                called = false;
             }
 
             public T Current => current;
@@ -169,7 +169,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.source = source;
                 this.cancellationToken = cancellationToken;
 
-                this.called = false;
+                called = false;
             }
 
             public T Current => current;
@@ -229,7 +229,7 @@ namespace Cysharp.Threading.Tasks.Linq
             {
                 this.source = source;
                 this.cancellationToken = cancellationToken;
-                this.queuedResult = new Queue<T>();
+                queuedResult = new Queue<T>();
 
                 if (cancellationToken.CanBeCanceled)
                 {

@@ -62,11 +62,11 @@ namespace Cysharp.Threading.Tasks.Linq
             public _EveryValueChanged(TTarget target, Func<TTarget, TProperty> propertySelector, IEqualityComparer<TProperty> equalityComparer, PlayerLoopTiming monitorTiming, CancellationToken cancellationToken, bool cancelImmediately)
             {
                 this.target = target;
-                this.targetAsUnityObject = target as UnityEngine.Object;
+                targetAsUnityObject = target as UnityEngine.Object;
                 this.propertySelector = propertySelector;
                 this.equalityComparer = equalityComparer;
                 this.cancellationToken = cancellationToken;
-                this.first = true;
+                first = true;
                 
                 if (cancelImmediately && cancellationToken.CanBeCanceled)
                 {
@@ -102,7 +102,7 @@ namespace Cysharp.Threading.Tasks.Linq
                     {
                         return CompletedTasks.False;
                     }
-                    this.currentValue = propertySelector(target);
+                    currentValue = propertySelector(target);
                     return CompletedTasks.True;
                 }
 
@@ -198,7 +198,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.propertySelector = propertySelector;
                 this.equalityComparer = equalityComparer;
                 this.cancellationToken = cancellationToken;
-                this.first = true;
+                first = true;
                 
                 if (cancelImmediately && cancellationToken.CanBeCanceled)
                 {
@@ -234,7 +234,7 @@ namespace Cysharp.Threading.Tasks.Linq
                     {
                         return CompletedTasks.False;
                     }
-                    this.currentValue = propertySelector(t);
+                    currentValue = propertySelector(t);
                     return CompletedTasks.True;
                 }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using JetBrains.Annotations;
 
 namespace Gameplay
@@ -8,7 +7,6 @@ namespace Gameplay
     public class ProjectileManager
     {
         private readonly HashSet<Projectile> _activeBullets = new();
-        private readonly List<Projectile> _cache = new();
 
         private readonly ProjectileSpawner _projectileSpawner;
 

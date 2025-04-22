@@ -248,7 +248,7 @@ namespace Cysharp.Threading.Tasks
             public AttachExternalCancellationSource(UniTask task, CancellationToken cancellationToken)
             {
                 this.cancellationToken = cancellationToken;
-                this.tokenRegistration = cancellationToken.RegisterWithoutCaptureExecutionContext(cancellationCallbackDelegate, this);
+                tokenRegistration = cancellationToken.RegisterWithoutCaptureExecutionContext(cancellationCallbackDelegate, this);
                 RunTask(task).Forget();
             }
 
@@ -307,7 +307,7 @@ namespace Cysharp.Threading.Tasks
             public AttachExternalCancellationSource(UniTask<T> task, CancellationToken cancellationToken)
             {
                 this.cancellationToken = cancellationToken;
-                this.tokenRegistration = cancellationToken.RegisterWithoutCaptureExecutionContext(cancellationCallbackDelegate, this);
+                tokenRegistration = cancellationToken.RegisterWithoutCaptureExecutionContext(cancellationCallbackDelegate, this);
                 RunTask(task).Forget();
             }
 
@@ -814,7 +814,7 @@ namespace Cysharp.Threading.Tasks
                     }
                     else
                     {
-                        this.exception = ExceptionDispatchInfo.Capture(ex);
+                        exception = ExceptionDispatchInfo.Capture(ex);
                     }
                 }
                 finally
@@ -884,7 +884,7 @@ namespace Cysharp.Threading.Tasks
                     }
                     else
                     {
-                        this.exception = ExceptionDispatchInfo.Capture(ex);
+                        exception = ExceptionDispatchInfo.Capture(ex);
                     }
                 }
                 finally

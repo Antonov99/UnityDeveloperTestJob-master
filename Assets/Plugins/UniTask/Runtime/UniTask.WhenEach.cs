@@ -32,15 +32,15 @@ namespace Cysharp.Threading.Tasks
 
         public WhenEachResult(T result)
         {
-            this.Result = result;
-            this.Exception = null;
+            Result = result;
+            Exception = null;
         }
 
         public WhenEachResult(Exception exception)
         {
             if (exception == null) throw new ArgumentNullException(nameof(exception));
-            this.Result = default;
-            this.Exception = exception;
+            Result = default;
+            Exception = exception;
         }
 
         public void TryThrow()

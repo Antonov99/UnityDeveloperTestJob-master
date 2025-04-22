@@ -6,13 +6,19 @@ namespace Gameplay
     public sealed class TowerEntityInstaller : MonoInstaller
     {
         [SerializeField]
+        public Transform _shootPoint;
+
+        [SerializeField]
+        private Rigidbody _rigidbody;
+
+        [SerializeField]
+        private float _rotationSpeed;
+
+        [SerializeField]
         private float _shootInterval;
 
         [SerializeField]
         public float _range = 4f;
-
-        [SerializeField]
-        public Transform _shootPoint;
 
         [SerializeField]
         private Projectile _projectilePrefab;
@@ -32,16 +38,17 @@ namespace Gameplay
                 .WithArguments(_shootPoint)
                 .NonLazy();
 
+            Container
+                .Bind<RotationComponent>()
+                .AsSingle()
+                .WithArguments(_rigidbody, _rotationSpeed)
+                .NonLazy();
+
             //Systems:
             Container
                 .BindInterfacesAndSelfTo<TowerAttackSystem>()
                 .AsSingle()
                 .WithArguments(_shootInterval, _myTransform, _range)
-                .NonLazy();
-
-            Container
-                .BindInterfacesAndSelfTo<FireController>()
-                .AsSingle()
                 .NonLazy();
 
             Container

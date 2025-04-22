@@ -35,7 +35,7 @@ namespace Cysharp.Threading.Tasks.Linq
             {
                 this.value = value;
                 this.cancellationToken = cancellationToken;
-                this.called = false;
+                called = false;
             }
 
             public TValue Current => value;

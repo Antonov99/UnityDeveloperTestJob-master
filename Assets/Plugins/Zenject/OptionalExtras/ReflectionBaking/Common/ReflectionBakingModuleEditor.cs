@@ -108,7 +108,7 @@ namespace Zenject.ReflectionBaking
             _injectMemberInfoType = _module.ImportType<InjectTypeInfo.InjectMemberInfo>();
             _injectMemberInfoConstructor = _module.ImportMethod<InjectTypeInfo.InjectMemberInfo>(".ctor");
 
-            _preserveConstructor = _module.ImportMethod<Zenject.Internal.PreserveAttribute>(".ctor");
+            _preserveConstructor = _module.ImportMethod<PreserveAttribute>(".ctor");
             _constructorInfoConstructor = _module.ImportMethod<InjectTypeInfo.InjectConstructorInfo>(".ctor");
 
             _injectableInfoType = _module.ImportType<InjectableInfo>();

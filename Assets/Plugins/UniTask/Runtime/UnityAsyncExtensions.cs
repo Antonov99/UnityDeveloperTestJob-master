@@ -50,7 +50,7 @@ namespace Cysharp.Threading.Tasks
             public AsyncOperationAwaiter(AsyncOperation asyncOperation)
             {
                 this.asyncOperation = asyncOperation;
-                this.continuationAction = null;
+                continuationAction = null;
             }
 
             public bool IsCompleted => asyncOperation.isDone;
@@ -276,7 +276,7 @@ namespace Cysharp.Threading.Tasks
             public ResourceRequestAwaiter(ResourceRequest asyncOperation)
             {
                 this.asyncOperation = asyncOperation;
-                this.continuationAction = null;
+                continuationAction = null;
             }
 
             public bool IsCompleted => asyncOperation.isDone;
@@ -511,7 +511,7 @@ namespace Cysharp.Threading.Tasks
             public AssetBundleRequestAwaiter(AssetBundleRequest asyncOperation)
             {
                 this.asyncOperation = asyncOperation;
-                this.continuationAction = null;
+                continuationAction = null;
             }
 
             public bool IsCompleted => asyncOperation.isDone;
@@ -747,7 +747,7 @@ namespace Cysharp.Threading.Tasks
             public AssetBundleCreateRequestAwaiter(AssetBundleCreateRequest asyncOperation)
             {
                 this.asyncOperation = asyncOperation;
-                this.continuationAction = null;
+                continuationAction = null;
             }
 
             public bool IsCompleted => asyncOperation.isDone;
@@ -990,7 +990,7 @@ namespace Cysharp.Threading.Tasks
             public UnityWebRequestAsyncOperationAwaiter(UnityWebRequestAsyncOperation asyncOperation)
             {
                 this.asyncOperation = asyncOperation;
-                this.continuationAction = null;
+                continuationAction = null;
             }
 
             public bool IsCompleted => asyncOperation.isDone;

@@ -21,13 +21,13 @@ namespace Elementary
         [ShowInInspector]
         public bool IsActive
         {
-            get { return this.coroutine != null; }
+            get { return coroutine != null; }
         }
 
         public float Duration
         {
-            get { return this.period; }
-            set { this.period = value; }
+            get { return period; }
+            set { period = value; }
         }
 
         [SerializeField]
@@ -46,20 +46,20 @@ namespace Elementary
 
         public void Play()
         {
-            if (this.coroutine == null)
+            if (coroutine == null)
             {
-                this.coroutine = MonoHelper.Instance.StartCoroutine(this.PeriodRoutine());
-                this.OnStarted?.Invoke();
+                coroutine = MonoHelper.Instance.StartCoroutine(PeriodRoutine());
+                OnStarted?.Invoke();
             }
         }
 
         public void Stop()
         {
-            if (this.coroutine != null)
+            if (coroutine != null)
             {
-                MonoHelper.Instance.StopCoroutine(this.coroutine);
-                this.coroutine = null;
-                this.OnStoped?.Invoke();
+                MonoHelper.Instance.StopCoroutine(coroutine);
+                coroutine = null;
+                OnStoped?.Invoke();
             }
         }
 
@@ -69,7 +69,7 @@ namespace Elementary
             while (true)
             {
                 yield return period;
-                this.OnPeriodEvent?.Invoke();
+                OnPeriodEvent?.Invoke();
             }
         }
     }

@@ -8,30 +8,42 @@ namespace Gameplay
         public event Action<Projectile> OnCollisionEntered;
         
         [SerializeField]
-        private float _speed = 0.2f;
+        private int _damage = 10;
 
         [SerializeField]
-        private int _damage = 10;
+        private Entity _entity;
+
+        private MoveComponent _moveComponent;
 
         private Transform _target;
 
-        public void SetPosition(Vector3 position)
+        private void Start()
         {
-            transform.position = position;
+            _target = null;
+            _moveComponent= _entity.Get<MoveComponent>();
         }
 
         private void Update()
         {
-            var translation = transform.forward * _speed;
-            transform.Translate(translation);
+            if (_target is null) 
+                OnCollisionEntered?.Invoke(this);
+            else
+                _moveComponent.Move(_target.position);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out Entity entity))
-                entity.Get<HealthComponent>()?.Damage(_damage);
+            if (!other.gameObject.TryGetComponent(out Entity entity)) return;
+            var healthComponent = entity.TryGet<HealthComponent>();
+            if (healthComponent is null) return;
+            healthComponent.Damage(_damage);
             
             OnCollisionEntered?.Invoke(this);
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            transform.position = position;
         }
 
         public void SetTarget(Transform target)

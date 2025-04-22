@@ -9,18 +9,27 @@ namespace Gameplay
     public sealed class TowerAttackSystem : ITickable
     {
         private readonly Timer _timer;
-        
+
         private readonly FireComponent _fireComponent;
         private readonly EnemyManager _enemyManager;
         private readonly Transform _myTransform;
         private readonly float _range;
+        private readonly RotationComponent _rotationComponent;
 
-        public TowerAttackSystem(float delay, EnemyManager enemyManager, Transform myTransform, float range)
+        public TowerAttackSystem(
+            float delay,
+            FireComponent fireComponent,
+            EnemyManager enemyManager,
+            Transform myTransform,
+            float range, RotationComponent rotationComponent)
         {
+            _timer = new Timer(delay);
+
+            _fireComponent = fireComponent;
             _enemyManager = enemyManager;
             _myTransform = myTransform;
             _range = range;
-            _timer = new Timer(delay);
+            _rotationComponent = rotationComponent;
         }
 
         void ITickable.Tick()
@@ -28,36 +37,32 @@ namespace Gameplay
             if (!FindNearestEnemy(out Transform target))
                 return;
 
+            _rotationComponent.Rotate(target.position);
             Fire(target);
         }
 
         private void Fire(Transform target)
         {
             if (_timer.IsPlaying) return;
-            
-            _fireComponent.Shoot(target);
-            _timer.Play();
-            _timer.OnFinished += OnFinished;
-        }
 
-        private void OnFinished()
-        {
-            _timer.OnFinished -= OnFinished;
+            _fireComponent.Shoot(target);
+            _timer.ResetTime();
+            _timer.Play();
         }
 
         //Проверить
         private bool FindNearestEnemy(out Transform transform)
         {
             transform = null;
-            
+
             var targets = _enemyManager.GetActiveEnemies();
             var minDistance = _range;
-            
+
             foreach (var target in targets)
             {
-                var distance = Vector3.Distance(_myTransform.position,target.transform.position);
-                
-                if (distance>minDistance) 
+                var distance = Vector3.Distance(_myTransform.position, target.transform.position);
+
+                if (distance > minDistance)
                     continue;
 
                 minDistance = distance;

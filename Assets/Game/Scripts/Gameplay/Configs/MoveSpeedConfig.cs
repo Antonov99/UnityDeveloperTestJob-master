@@ -1,12 +1,13 @@
-using UnityEngine;
+using System;
 
 namespace Gameplay
 {
-    public class MoveSpeedConfig : ScriptableObject
+    [Serializable]
+    public class MoveSpeedConfig
     {
-        public float BaseSpeed { get; set; }
-        public float MinSpeed { get; set; }
-        public float MaxSpeed { get; set; }
-        public float AccelerationFactor { get; set; }
+        public float BaseSpeed;
+        public float MinSpeed;
+        public float MaxSpeed;
+        public float AccelerationFactor;
     }
 }

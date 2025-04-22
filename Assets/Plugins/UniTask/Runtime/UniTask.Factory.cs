@@ -472,7 +472,7 @@ namespace Cysharp.Threading.Tasks
         {
             Func<UniTask> factory;
             UniTask task;
-            UniTask.Awaiter awaiter;
+            Awaiter awaiter;
 
             public DeferPromise(Func<UniTask> factory)
             {
@@ -556,7 +556,7 @@ namespace Cysharp.Threading.Tasks
             Func<TState, UniTask> factory;
             TState argument;
             UniTask task;
-            UniTask.Awaiter awaiter;
+            Awaiter awaiter;
 
             public DeferPromiseWithState(TState argument, Func<TState, UniTask> factory)
             {

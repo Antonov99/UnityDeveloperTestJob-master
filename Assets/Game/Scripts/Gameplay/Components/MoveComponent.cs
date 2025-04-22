@@ -23,23 +23,25 @@ namespace Gameplay
             _accelerationFactor = moveSpeedConfig.AccelerationFactor;
         }
 
-        public void Move(Vector3 direction)
+        public void Move(Vector3 targetPosition)
         {
-            if (direction == Vector3.zero)
+            Vector3 direction = targetPosition - _rigidbody.position;
+
+            if (direction.magnitude < 0.1f)
             {
                 _rigidbody.velocity = Vector3.zero;
                 return;
             }
 
-            float inputMagnitude = direction.magnitude;
-            if (inputMagnitude > 1) direction.Normalize();
+            direction.Normalize();
 
+            float inputMagnitude = direction.magnitude;
             float speedMultiplier = Mathf.Pow(inputMagnitude, _accelerationFactor);
             float dynamicSpeed = Mathf.Lerp(_minSpeed, _maxSpeed, speedMultiplier);
 
             float finalSpeed = dynamicSpeed * _baseSpeed / _maxSpeed;
 
-            _rigidbody.velocity = direction.normalized * finalSpeed;
+            _rigidbody.velocity = direction * finalSpeed;
         }
     }
 }
