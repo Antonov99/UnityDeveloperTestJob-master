@@ -19,13 +19,12 @@ namespace Gameplay
 
         private void Start()
         {
-            _target = null;
             _moveComponent= _entity.Get<MoveComponent>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (_target is null) 
+            if (_target.gameObject.activeInHierarchy==false) 
                 OnCollisionEntered?.Invoke(this);
             else
                 _moveComponent.Move(_target.position);
@@ -37,7 +36,7 @@ namespace Gameplay
             var healthComponent = entity.TryGet<HealthComponent>();
             if (healthComponent is null) return;
             healthComponent.Damage(_damage);
-            
+
             OnCollisionEntered?.Invoke(this);
         }
 

@@ -26,6 +26,7 @@ namespace Gameplay
             if (enemy is null) throw new NullReferenceException();
             _activeEnemies.Add(enemy);
             enemy.transform.position = _spawnPointTransform.position;
+            enemy.Get<HealthComponent>().SetMaxHealth();
         }
 
         public void Despawn(Entity entity)

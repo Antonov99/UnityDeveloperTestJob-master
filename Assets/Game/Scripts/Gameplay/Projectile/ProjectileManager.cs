@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
+using UnityEngine;
 
 namespace Gameplay
 {
@@ -28,6 +29,8 @@ namespace Gameplay
 
         public void Despawn(Projectile projectile)
         {
+            Debug.Log("Despawn");
+
             if (!_activeBullets.Remove(projectile)) return;
             
             projectile.OnCollisionEntered -= Despawn;
